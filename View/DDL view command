@@ -14,3 +14,27 @@ create view V_monthly_summary as
 -- for delete view 
 
 DROP VIEW IF EXISTS V_monthly_summary;
+
+--  (update logic of view) for mysql 
+
+create or replace view V_monthly_summary as (
+ SELECT
+        DATE_FORMAT(orderdate, '%Y-%m-01') AS order_month,
+        SUM(sales) AS total_sales,
+        count(orderid) as totalorders,
+        sum(quantity) totalquantity
+    FROM orders
+    GROUP BY DATE_FORMAT(orderdate, '%Y-%m-01')
+);
+
+-- update logic of view in mysql method two
+
+alter view V_monthly_summary as (
+ SELECT
+        DATE_FORMAT(orderdate, '%Y-%m-01') AS order_month,
+        SUM(sales) AS total_sales,
+        count(orderid) as totalorders,
+        sum(quantity) totalquantity
+    FROM orders
+    GROUP BY DATE_FORMAT(orderdate, '%Y-%m-01')
+)
