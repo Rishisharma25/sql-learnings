@@ -1,4 +1,4 @@
--- find the running total of sales for each month 
+-- find the running total of sales for each month (with CTE)
 use salesdb;
 WITH cte_monthly_summary AS (
     SELECT
